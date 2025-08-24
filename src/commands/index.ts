@@ -7,9 +7,11 @@ import * as vscode from 'vscode';
 import { COMMANDS } from '@constants';
 import { generateCuidV2AtCursor } from '@commands/generateCuidV2AtCursor';
 import { generateMultipleCuidV2 } from '@commands/generateMultipleCuidV2';
+import { validateCuidV2 } from './validateCuidV2';
 
 // Re-export commands for external access
 export { generateCuidV2AtCursor, generateMultipleCuidV2 };
+export { validateCuidV2 };
 
 /**
  * Registers all commands with VS Code
@@ -28,9 +30,16 @@ export function registerCommands(context: vscode.ExtensionContext): void {
     generateMultipleCuidV2,
   );
 
+  // Register the validate CUIDv2 command
+  const validateCuidV2Command = vscode.commands.registerCommand(
+    COMMANDS.VALIDATE_CUIDV2,
+    validateCuidV2,
+  );
+
   // Add to context subscriptions for proper cleanup
   context.subscriptions.push(
     generateCuidV2Command,
     generateMultipleCuidV2Command,
+    validateCuidV2Command,
   );
 }

@@ -46,8 +46,22 @@
         "command": "cuidv2-tools.generateMultipleCuidv2",
         "title": "Generate Multiple CUIDv2s",
         "category": "CUIDv2 Tools"
+      },
+      {
+        "command": "cuidv2-tools.validateCuidv2",
+        "title": "Validate CUIDv2",
+        "category": "CUIDv2 Tools"
       }
-    ]
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "cuidv2-tools.validateCuidv2",
+          "when": "editorHasSelection",
+          "group": "CUIDv2 Tools"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "pnpm run package",

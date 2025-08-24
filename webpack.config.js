@@ -29,7 +29,8 @@ const extensionConfig = {
     alias: {
       '@commands': path.resolve(__dirname, 'src/commands'),
       '@services': path.resolve(__dirname, 'src/services'),
-      '@constants': path.resolve(__dirname, 'src/constants.ts')
+      '@constants': path.resolve(__dirname, 'src/constants.ts'),
+      '@interfaces': path.resolve(__dirname, 'src/interfaces'),
     }
   },
   module: {
