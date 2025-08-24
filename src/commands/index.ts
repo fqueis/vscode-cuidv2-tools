@@ -9,11 +9,13 @@ import { generateCuidV2AtCursor } from '@commands/generateCuidV2AtCursor';
 import { generateMultipleCuidV2 } from '@commands/generateMultipleCuidV2';
 import { validateCuidV2 } from '@commands/validateCuidV2';
 import { regenerateCuidV2 } from '@commands/regenerateCuidV2';
+import { replaceUuidsWithCuidV2 } from '@commands/replaceUuidsWithCuidV2';
 
 // Re-export commands for external access
 export { generateCuidV2AtCursor, generateMultipleCuidV2 };
 export { validateCuidV2 };
 export { regenerateCuidV2 };
+export { replaceUuidsWithCuidV2 };
 
 /**
  * Registers all commands with VS Code
@@ -44,11 +46,18 @@ export function registerCommands(context: vscode.ExtensionContext): void {
     regenerateCuidV2,
   );
 
+  // Register the replace UUIDs with CUIDv2 command
+  const replaceUuidsWithCuidV2Command = vscode.commands.registerCommand(
+    COMMANDS.REPLACE_UUIDS_WITH_CUIDV2,
+    replaceUuidsWithCuidV2,
+  );
+
   // Add to context subscriptions for proper cleanup
   context.subscriptions.push(
     generateCuidV2Command,
     generateMultipleCuidV2Command,
     validateCuidV2Command,
     regenerateCuidV2Command,
+    replaceUuidsWithCuidV2Command,
   );
 }

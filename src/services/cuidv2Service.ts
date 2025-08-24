@@ -11,6 +11,21 @@ import { createId } from '@paralleldrive/cuid2';
  */
 export class CuidV2Service {
   /**
+   * Regular expression pattern to match CUIDv2 identifiers
+   * Matches 24-32 character strings that start with a lowercase letter
+   * and contain only lowercase letters and numbers
+   */
+  private static readonly CUIDV2_PATTERN = /\b[a-z][a-z0-9]{23,31}\b/g;
+
+  /**
+   * Regular expression pattern to match UUID identifiers
+   * Matches standard UUID format: 8-4-4-4-12 hexadecimal characters
+   * Supports both uppercase and lowercase, with or without hyphens
+   */
+  private static readonly UUID_PATTERN =
+    /\b[0-9a-fA-F]{8}-?[0-9a-fA-F]{4}-?[0-9a-fA-F]{4}-?[0-9a-fA-F]{4}-?[0-9a-fA-F]{12}\b/g;
+
+  /**
    * Generates a new CUIDv2 identifier
    * @returns A new CUIDv2 string
    */
@@ -62,13 +77,6 @@ export class CuidV2Service {
   }
 
   /**
-   * Regular expression pattern to match CUIDv2 identifiers
-   * Matches 24-32 character strings that start with a lowercase letter
-   * and contain only lowercase letters and numbers
-   */
-  private static readonly CUIDV2_PATTERN = /\b[a-z][a-z0-9]{23,31}\b/g;
-
-  /**
    * Finds all CUIDv2 identifiers in the given text
    * @param text The text to search for CUIDv2 identifiers
    * @returns Array of found CUIDv2 strings
@@ -113,6 +121,58 @@ export class CuidV2Service {
     const afterRange = text.substring(endOffset);
 
     const result = this.regenerateAllCuidV2s(rangeText);
+
+    return {
+      text: beforeRange + result.text + afterRange,
+      count: result.count,
+    };
+  }
+
+  /**
+   * Finds all UUID identifiers in the given text
+   * @param text The text to search for UUID identifiers
+   * @returns Array of found UUID strings
+   */
+  static findUuids(text: string): string[] {
+    const matches = text.match(this.UUID_PATTERN);
+    return matches ? [...new Set(matches)] : [];
+  }
+
+  /**
+   * Replaces all UUID identifiers in the text with new CUIDv2 identifiers
+   * @param text The text containing UUIDs to replace
+   * @returns Object containing the modified text and count of replacements
+   */
+  static replaceAllUuidsWithCuidV2(text: string): {
+    text: string;
+    count: number;
+  } {
+    let replacedCount = 0;
+    const newText = text.replace(this.UUID_PATTERN, () => {
+      replacedCount++;
+      return this.generateCuidV2();
+    });
+
+    return { text: newText, count: replacedCount };
+  }
+
+  /**
+   * Replaces UUID identifiers within a specific range of text with CUIDv2 identifiers
+   * @param text The full text
+   * @param startOffset The start position of the range
+   * @param endOffset The end position of the range
+   * @returns Object containing the modified text and count of replacements
+   */
+  static replaceUuidsWithCuidV2InRange(
+    text: string,
+    startOffset: number,
+    endOffset: number,
+  ): { text: string; count: number } {
+    const beforeRange = text.substring(0, startOffset);
+    const rangeText = text.substring(startOffset, endOffset);
+    const afterRange = text.substring(endOffset);
+
+    const result = this.replaceAllUuidsWithCuidV2(rangeText);
 
     return {
       text: beforeRange + result.text + afterRange,

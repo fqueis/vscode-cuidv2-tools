@@ -16,4 +16,5 @@ export const COMMANDS = {
   GENERATE_MULTIPLE_CUIDV2: 'cuidv2-tools.generateMultipleCuidv2',
   VALIDATE_CUIDV2: 'cuidv2-tools.validateCuidv2',
   REGENERATE_CUIDV2: 'cuidv2-tools.regenerateCuidv2',
+  REPLACE_UUIDS_WITH_CUIDV2: 'cuidv2-tools.replaceUuidsWithCuidv2',
 } as const;

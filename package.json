@@ -56,6 +56,11 @@
         "command": "cuidv2-tools.regenerateCuidv2",
         "title": "Regenerate CUIDv2 Identifiers",
         "category": "CUIDv2 Tools"
+      },
+      {
+        "command": "cuidv2-tools.replaceUuidsWithCuidv2",
+        "title": "Replace UUIDs with CUIDv2",
+        "category": "CUIDv2 Tools"
       }
     ],
     "menus": {
@@ -72,6 +77,11 @@
         },
         {
           "command": "cuidv2-tools.regenerateCuidv2",
+          "when": "editorTextFocus",
+          "group": "CUIDv2 Tools"
+        },
+        {
+          "command": "cuidv2-tools.replaceUuidsWithCuidv2",
           "when": "editorTextFocus",
           "group": "CUIDv2 Tools"
         }
