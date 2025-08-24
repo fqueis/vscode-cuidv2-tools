@@ -33,13 +33,18 @@
     "type": "git",
     "url": "https://github.com/fqueis/vscode-cuidv2-tools.git"
   },
-  "activationEvents": [],
+
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
         "command": "cuidv2-tools.generateCuidv2AtCursor",
         "title": "Generate CUIDv2 at cursor",
+        "category": "CUIDv2 Tools"
+      },
+      {
+        "command": "cuidv2-tools.generateMultipleCuidv2",
+        "title": "Generate Multiple CUIDv2s",
         "category": "CUIDv2 Tools"
       }
     ]
