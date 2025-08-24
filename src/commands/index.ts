@@ -7,11 +7,13 @@ import * as vscode from 'vscode';
 import { COMMANDS } from '@constants';
 import { generateCuidV2AtCursor } from '@commands/generateCuidV2AtCursor';
 import { generateMultipleCuidV2 } from '@commands/generateMultipleCuidV2';
-import { validateCuidV2 } from './validateCuidV2';
+import { validateCuidV2 } from '@commands/validateCuidV2';
+import { regenerateCuidV2 } from '@commands/regenerateCuidV2';
 
 // Re-export commands for external access
 export { generateCuidV2AtCursor, generateMultipleCuidV2 };
 export { validateCuidV2 };
+export { regenerateCuidV2 };
 
 /**
  * Registers all commands with VS Code
@@ -36,10 +38,17 @@ export function registerCommands(context: vscode.ExtensionContext): void {
     validateCuidV2,
   );
 
+  // Register the regenerate CUIDv2 command
+  const regenerateCuidV2Command = vscode.commands.registerCommand(
+    COMMANDS.REGENERATE_CUIDV2,
+    regenerateCuidV2,
+  );
+
   // Add to context subscriptions for proper cleanup
   context.subscriptions.push(
     generateCuidV2Command,
     generateMultipleCuidV2Command,
     validateCuidV2Command,
+    regenerateCuidV2Command,
   );
 }

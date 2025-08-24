@@ -51,6 +51,11 @@
         "command": "cuidv2-tools.validateCuidv2",
         "title": "Validate CUIDv2",
         "category": "CUIDv2 Tools"
+      },
+      {
+        "command": "cuidv2-tools.regenerateCuidv2",
+        "title": "Regenerate CUIDv2 Identifiers",
+        "category": "CUIDv2 Tools"
       }
     ],
     "menus": {
@@ -63,6 +68,11 @@
         {
           "command": "cuidv2-tools.generateCuidv2AtCursor",
           "when": "editorTextFocus && !editorHasSelection",
+          "group": "CUIDv2 Tools"
+        },
+        {
+          "command": "cuidv2-tools.regenerateCuidv2",
+          "when": "editorTextFocus",
           "group": "CUIDv2 Tools"
         }
       ]

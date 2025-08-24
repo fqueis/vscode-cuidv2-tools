@@ -121,9 +121,9 @@ async function displayResults(
     metadata: {
       count: quantity,
       generatedAt: new Date().toISOString(),
-      type: 'CUIDv2'
+      type: 'CUIDv2',
     },
-    identifiers: cuidv2s
+    identifiers: cuidv2s,
   };
 
   // Format as pretty-printed JSON
