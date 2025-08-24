@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
-import { CuidV2Service } from '../services/cuidv2Service';
+import { CuidV2Service } from '@services/cuidv2Service';
+import { ConfigurationService } from '@services/configurationService';
 
 /**
  * Command to regenerate CUIDv2 identifiers in the active editor
@@ -52,14 +53,13 @@ async function regenerateInSelection(
     return;
   }
 
-  // Show confirmation dialog
-  const action = await vscode.window.showWarningMessage(
+  // Show confirmation dialog if enabled
+  const shouldProceed = await ConfigurationService.showConfirmationIfEnabled(
     `Found ${foundCuids.length} CUIDv2 identifier(s) in the selected text. Do you want to regenerate them?`,
     { modal: true },
-    'Yes',
   );
 
-  if (action !== 'Yes') return;
+  if (!shouldProceed) return;
 
   // Get the start and end offsets for the selection
   const startOffset = document.offsetAt(selection.start);
@@ -112,15 +112,14 @@ async function regenerateInFullFile(editor: vscode.TextEditor): Promise<void> {
     return;
   }
 
-  // Show confirmation dialog with file name
+  // Show confirmation dialog with file name if enabled
   const fileName = document.fileName.split('/').pop() || 'current file';
-  const action = await vscode.window.showWarningMessage(
+  const shouldProceed = await ConfigurationService.showConfirmationIfEnabled(
     `Found ${foundCuids.length} CUIDv2 identifier(s) in ${fileName}. Do you want to regenerate all of them?`,
     { modal: true },
-    'Yes',
   );
 
-  if (action !== 'Yes') return;
+  if (!shouldProceed) return;
 
   // Regenerate all CUIDv2s in the file
   const result = CuidV2Service.regenerateAllCuidV2s(fullText);

@@ -63,6 +63,16 @@
         "category": "CUIDv2 Tools"
       }
     ],
+    "configuration": {
+      "title": "CUIDv2 Tools",
+      "properties": {
+        "cuidv2-tools.confirmBeforeExecution": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show confirmation dialogs before executing destructive operations like regenerating CUIDv2s or replacing UUIDs"
+        }
+      }
+    },
     "menus": {
       "editor/context": [
         {

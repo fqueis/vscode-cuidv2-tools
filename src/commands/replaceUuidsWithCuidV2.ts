@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
-import { CuidV2Service } from '../services/cuidv2Service';
+import { CuidV2Service } from '@services/cuidv2Service';
+import { ConfigurationService } from '@services/configurationService';
 
 /**
  * Command to replace UUID identifiers with CUIDv2 identifiers in the active editor
@@ -52,14 +53,13 @@ async function replaceInSelection(
     return;
   }
 
-  // Show confirmation dialog
-  const action = await vscode.window.showWarningMessage(
+  // Show confirmation dialog if enabled
+  const shouldProceed = await ConfigurationService.showConfirmationIfEnabled(
     `Found ${foundUuids.length} UUID identifier(s) in the selected text. Do you want to replace them with CUIDv2 identifiers?`,
     { modal: true },
-    'Yes',
   );
 
-  if (action !== 'Yes') return;
+  if (!shouldProceed) return;
 
   // Get the start and end offsets for the selection
   const startOffset = document.offsetAt(selection.start);
@@ -112,15 +112,14 @@ async function replaceInFullFile(editor: vscode.TextEditor): Promise<void> {
     return;
   }
 
-  // Show confirmation dialog with file name
+  // Show confirmation dialog with file name if enabled
   const fileName = document.fileName.split('/').pop() || 'current file';
-  const action = await vscode.window.showWarningMessage(
+  const shouldProceed = await ConfigurationService.showConfirmationIfEnabled(
     `Found ${foundUuids.length} UUID identifier(s) in ${fileName}. Do you want to replace all of them with CUIDv2 identifiers?`,
     { modal: true },
-    'Yes',
   );
 
-  if (action !== 'Yes') return;
+  if (!shouldProceed) return;
 
   // Replace all UUIDs with CUIDv2s in the file
   const result = CuidV2Service.replaceAllUuidsWithCuidV2(fullText);
@@ -142,61 +141,6 @@ async function replaceInFullFile(editor: vscode.TextEditor): Promise<void> {
   } else {
     vscode.window.showInformationMessage(
       'No valid UUID identifiers found to replace',
-    );
-  }
-}
-
-/**
- * Command to preview UUID identifiers that would be replaced with CUIDv2 identifiers
- * Shows the UUIDs without making any changes
- */
-export async function previewUuidReplacement(): Promise<void> {
-  const editor = vscode.window.activeTextEditor;
-  if (!editor) {
-    vscode.window.showErrorMessage('No active editor found');
-    return;
-  }
-
-  const selection = editor.selection;
-  const document = editor.document;
-
-  try {
-    let textToAnalyze: string;
-    let context: string;
-
-    // Check if text is selected
-    if (!selection.isEmpty) {
-      textToAnalyze = document.getText(selection);
-      context = 'selected text';
-    } else {
-      textToAnalyze = document.getText();
-      const fileName = document.fileName.split('/').pop() || 'current file';
-      context = fileName;
-    }
-
-    // Find UUIDs in the text
-    const foundUuids = CuidV2Service.findUuids(textToAnalyze);
-
-    if (foundUuids.length === 0) {
-      vscode.window.showInformationMessage(
-        `No UUID identifiers found in the ${context}`,
-      );
-      return;
-    }
-
-    // Show preview of UUIDs that would be replaced
-    const previewList = foundUuids.slice(0, 10); // Show up to 10 UUIDs
-    const moreText = foundUuids.length > 10 ? `\n... and ${foundUuids.length - 10} more` : '';
-    
-    vscode.window.showInformationMessage(
-      `Found ${foundUuids.length} UUID identifier(s) in the ${context}:\n\n${previewList.join('\n')}${moreText}`,
-      { modal: true },
-    );
-  } catch (error: unknown) {
-    const errorMessage =
-      error instanceof Error ? error.message : 'Unknown error occurred';
-    vscode.window.showErrorMessage(
-      `Failed to preview UUID identifiers: ${errorMessage}`,
     );
   }
 }
