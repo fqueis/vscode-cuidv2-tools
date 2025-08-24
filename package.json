@@ -1,0 +1,63 @@
+{
+  "name": "cuidv2-tools",
+  "displayName": "CUIDv2 Tools",
+  "description": "A powerful toolkit for working with CUIDv2 identifiers",
+  "version": "0.0.1",
+  "publisher": "fqueis",
+  "author": {
+    "name": "Felipe Queis",
+    "email": "fqueis@gmail.com"
+  },
+  "engines": {
+    "vscode": "^1.103.0"
+  },
+  "categories": [
+    "Snippets"
+  ],
+  "keywords": [
+    "cuid",
+    "cuid2",
+    "uuid",
+    "guid",
+    "unique id",
+    "identifier",
+    "generator",
+    "validate",
+    "key",
+    "tools"
+  ],
+  "bugs": {
+    "url": "https://github.com/fqueis/vscode-cuidv2-tools/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fqueis/vscode-cuidv2-tools.git"
+  },
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "pnpm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.103.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "@typescript-eslint/eslint-plugin": "^8.39.0",
+    "@typescript-eslint/parser": "^8.39.0",
+    "eslint": "^9.32.0",
+    "typescript": "^5.9.2",
+    "ts-loader": "^9.5.2",
+    "webpack": "^5.101.0",
+    "webpack-cli": "^6.0.1",
+    "@vscode/test-cli": "^0.0.11",
+    "@vscode/test-electron": "^2.5.2"
+  }
+}
