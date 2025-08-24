@@ -5,7 +5,6 @@
 
 import * as vscode from 'vscode';
 import { createId } from '@paralleldrive/cuid2';
-import { CuidV2ValidationResult } from '@interfaces/cuidv2';
 
 /**
  * Service class for CUIDv2 operations
@@ -42,50 +41,6 @@ export class CuidV2Service {
   }
 
   /**
-   * Validates a CUIDv2 identifier according to specification requirements
-   * @param cuid The CUID string to validate
-   * @returns Object containing validation result and details
-   */
-  static validateCuidV2Format(cuid: string): CuidV2ValidationResult {
-    const errors: string[] = [];
-    const details = {
-      length: cuid.length,
-      startsWithLetter: /^[a-z]/.test(cuid),
-      containsOnlyValidChars: /^[a-z0-9]+$/.test(cuid),
-      format: 'CUIDv2',
-    };
-
-    // CUIDv2 specification validation
-    // Length should be between 24-32 characters (typical range)
-    if (cuid.length < 24 || cuid.length > 32) {
-      errors.push(`Invalid length: ${cuid.length} characters (expected 24-32)`);
-    }
-
-    // Must start with a lowercase letter
-    if (!details.startsWithLetter) {
-      errors.push('Must start with a lowercase letter');
-    }
-
-    // Must contain only lowercase letters and numbers
-    if (!details.containsOnlyValidChars) {
-      errors.push(
-        'Contains invalid characters (only lowercase letters and numbers allowed)',
-      );
-    }
-
-    // Check for empty or whitespace
-    if (!cuid || cuid.trim() !== cuid) {
-      errors.push('Cannot be empty or contain whitespace');
-    }
-
-    return {
-      isValid: errors.length === 0,
-      errors,
-      details,
-    };
-  }
-
-  /**
    * Validates if a given string is a valid CUIDv2.
    * A valid CUIDv2 must be between 24 and 32 characters long,
    * contain only lowercase letters and numbers, and start with a lowercase letter.
@@ -93,11 +48,17 @@ export class CuidV2Service {
    * @returns True if the string is a valid CUIDv2, false otherwise.
    */
   static validateCuidV2(cuid: string): boolean {
-    if (typeof cuid !== 'string') {
-      return false;
-    }
+    // CUIDv2 specification validation
+    // Length should be between 24-32 characters (typical range)
+    if (cuid.length < 24 || cuid.length > 32) return false;
 
-    return this.validateCuidV2Format(cuid).isValid;
+    // Must start with a lowercase letter
+    if (!/^[a-z]/.test(cuid)) return false;
+
+    // Must contain only lowercase letters and numbers
+    if (!/^[a-z0-9]+$/.test(cuid)) return false;
+
+    return true;
   }
 
   /**

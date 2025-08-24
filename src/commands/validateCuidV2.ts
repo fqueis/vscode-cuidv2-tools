@@ -1,17 +1,13 @@
 import * as vscode from 'vscode';
 import { CuidV2Service } from '@services/cuidv2Service';
-import { CuidV2ValidationResult } from '@interfaces/cuidv2';
 
 /**
  * Displays validation results to the user
  * @param cuid The CUID that was validated
- * @param result The validation result
+ * @param isCuidValid Whether the CUID is valid or not
  */
-function displayValidationResult(
-  cuid: string,
-  result: CuidV2ValidationResult,
-): void {
-  if (result.isValid) {
+function displayValidationResult(cuid: string, isCuidValid: boolean): void {
+  if (isCuidValid) {
     vscode.window.showInformationMessage(`'${cuid}' is a valid CUIDv2`);
   } else {
     vscode.window.showErrorMessage(`'${cuid}' is not a valid CUIDv2`);
@@ -75,10 +71,10 @@ export async function validateCuidV2(): Promise<void> {
     }
 
     // Validate the CUID
-    const validationResult = CuidV2Service.validateCuidV2Format(cuidToValidate);
+    const isCuidValid = CuidV2Service.validateCuidV2(cuidToValidate);
 
     // Display results
-    displayValidationResult(cuidToValidate, validationResult);
+    displayValidationResult(cuidToValidate, isCuidValid);
   } catch (error: unknown) {
     vscode.window.showErrorMessage(
       `Error during CUIDv2 validation: ${error instanceof Error ? error.message : 'Unknown error'}`,
