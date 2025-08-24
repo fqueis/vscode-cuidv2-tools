@@ -1,9 +1,38 @@
-# Change Log
+# Changelog
 
-All notable changes to the "cuidv2-tools" extension will be documented in this file.
+All notable changes to this project will be documented in this file.
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [0.0.1] - 2025-08-24
+
+### Added
+
+- CUIDv2 generation at cursor position
+- Multiple CUIDv2 generation with batch processing
+- CUIDv2 validation with detailed feedback
+- CUIDv2 regeneration for selected text or entire files
+- UUID to CUIDv2 replacement functionality
+- Configurable confirmation dialogs for destructive operations
+- Context menu integration for right-click access
+- Command Palette integration
+- Progress indicators for batch operations
+- Comprehensive error handling and user feedback
+
+### Technical
+
+- TypeScript implementation with strict typing
+- Modular service architecture (CuidV2Service, ConfigurationService)
+- Webpack build configuration
+- VS Code extension API integration
+- Regular expression patterns for UUID detection
+- User configuration management
 
 ## [Unreleased]
 
-- Initial release
+### Planned
+
+- Additional ID format support
+- Bulk file processing
+- Custom ID format configuration

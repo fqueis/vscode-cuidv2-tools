@@ -19,13 +19,9 @@
     "cuid2",
     "uuid",
     "guid",
-    "unique id",
-    "identifier",
-    "generator",
-    "validate",
-    "key",
-    "tools"
+    "unique id"
   ],
+  "icon": "icon.png",
   "bugs": {
     "url": "https://github.com/fqueis/vscode-cuidv2-tools/issues"
   },
