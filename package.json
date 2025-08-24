@@ -59,6 +59,11 @@
           "command": "cuidv2-tools.validateCuidv2",
           "when": "editorHasSelection",
           "group": "CUIDv2 Tools"
+        },
+        {
+          "command": "cuidv2-tools.generateCuidv2AtCursor",
+          "when": "editorTextFocus && !editorHasSelection",
+          "group": "CUIDv2 Tools"
         }
       ]
     }
