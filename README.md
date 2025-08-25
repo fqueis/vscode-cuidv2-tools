@@ -4,7 +4,7 @@
 
 A Visual Studio Code extension that provides a comprehensive toolkit for working with CUIDv2 (Collision-resistant Unique Identifiers) in your development workflow.
 
-## 🎬 Demo
+## Demo
 
 ![CUIDv2 Tools Usage Demo](./usage.gif)
 
