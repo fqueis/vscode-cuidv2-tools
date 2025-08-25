@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://placehold.co/800x200@2x/000/FFF.png?text=Cuidv2+Tools&font=montserrat" width="800" />
+  <img src="https://placehold.co/800x200@2x/000/FFF.png?text=CUIDv2+Tools&font=montserrat" width="800" />
 </p>
 
 A Visual Studio Code extension that provides a comprehensive toolkit for working with CUIDv2 (Collision-resistant Unique Identifiers) in your development workflow.
