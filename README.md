@@ -1,6 +1,14 @@
-# CUIDv2 Tools
+<p align="center">
+  <img src="https://placehold.co/800x200@2x/000/FFF.png?text=Cuidv2+Tools&font=montserrat" width="800" />
+</p>
 
 A Visual Studio Code extension that provides a comprehensive toolkit for working with CUIDv2 (Collision-resistant Unique Identifiers) in your development workflow.
+
+## 🎬 Demo
+
+![CUIDv2 Tools Usage Demo](./usage.gif)
+
+_The above demonstration shows the key features of CUIDv2 Tools in action, including generation, validation, regeneration and UUID replacement capabilities._
 
 ## Features
 
@@ -182,7 +190,7 @@ When reporting issues, please include:
 - Expected vs actual behavior
 - Screenshots (if applicable)
 
-## 📚 API Reference
+## API Reference
 
 ### CuidV2Service
 
