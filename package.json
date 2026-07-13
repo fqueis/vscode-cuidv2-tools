@@ -2,7 +2,7 @@
   "name": "cuidv2-tools",
   "displayName": "CUIDv2 Tools",
   "description": "A powerful toolkit for working with CUIDv2 identifiers",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "publisher": "fqueis",
   "license": "MIT",
   "author": {
