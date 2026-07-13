@@ -5,13 +5,14 @@
     "lib": ["ES2022"],
     "sourceMap": true,
     "rootDir": "src",
-    "baseUrl": ".",
     "paths": {
-      "@commands/*": ["src/commands/*"],
-      "@services/*": ["src/services/*"],
-      "@constants": ["src/constants"],
-      "@interfaces/*": ["src/interfaces/*"]
+      "@commands/*": ["./src/commands/*"],
+      "@services/*": ["./src/services/*"],
+      "@constants": ["./src/constants"],
+      "@interfaces/*": ["./src/interfaces/*"]
     },
     "strict": true
-  }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["src/test/**/*"]
 }

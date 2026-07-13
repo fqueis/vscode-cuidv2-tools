@@ -7,5 +7,5 @@
     "out": true,
     "dist": true
   },
-  "typescript.tsc.autoDetect": "off"
+  "js/ts.tsc.autoDetect": "off"
 }
